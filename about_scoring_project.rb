@@ -29,8 +29,38 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 #
 # Your goal is to write the score method.
 
+def count_repeat (array, number)
+  count_number = array.inject(0) do |count, n|
+    count += 1 if number == n
+    count
+  end
+end
+
 def score(dice)
-  # You need to write this method
+  point = 0
+
+
+  count_number = count_repeat dice, 1
+  point = count_number / 3 * 1000
+  point += count_number % 3 * 100
+
+  count_number = count_repeat dice, 2
+  point += count_number / 3 * 200
+
+  count_number = count_repeat dice, 3
+  point += count_number / 3 * 300
+
+  count_number = count_repeat dice, 4
+  point += count_number / 3 * 400
+
+  count_number = count_repeat dice, 5
+  point += count_number / 3 * 500
+  point += count_number % 3 * 50
+
+  count_number = count_repeat dice, 6
+  point += count_number / 3 * 600
+
+  return point
 end
 
 class AboutScoringProject < Neo::Koan
